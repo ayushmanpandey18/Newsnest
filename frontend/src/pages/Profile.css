@@ -1,0 +1,85 @@
+.profile-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.profile-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.2rem; }
+.profile-email { color: var(--text2); font-size: 0.9rem; }
+
+.profile-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+.section-desc { font-size: 0.85rem; color: var(--text2); margin-bottom: 1.25rem; }
+
+.topics-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+
+.topic-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  color: var(--text2);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: all var(--transition);
+}
+
+.topic-chip:hover { border-color: var(--accent); color: var(--text); }
+.topic-chip.active { background: rgba(108,99,255,0.2); border-color: var(--accent); color: var(--accent2); }
+.topic-check { font-size: 0.7rem; }
+
+.save-btn {
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--transition);
+}
+.save-btn:hover:not(:disabled) { background: #7c73ff; }
+.save-btn:disabled { opacity: 0.6; }
+
+.danger-section { border-color: rgba(255,71,87,0.2); }
+
+.logout-full-btn {
+  color: var(--red);
+  border: 1px solid rgba(255,71,87,0.3);
+  background: rgba(255,71,87,0.08);
+  border-radius: var(--radius);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+.logout-full-btn:hover { background: rgba(255,71,87,0.15); }
