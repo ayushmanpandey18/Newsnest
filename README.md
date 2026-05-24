@@ -1,3 +1,7 @@
+## 🌐 Live Demo
+👉 [https://newsnest-eight.vercel.app](https://newsnest-eight.vercel.app)
+
+
 # 🪺 NewsNest — Personalized News Dashboard
 
 A full-stack web app where users sign up, pick their interests, and get a personalized news feed powered by the GNews API. Features bookmarks, likes, and notifications.
