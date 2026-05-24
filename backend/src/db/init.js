@@ -3,6 +3,10 @@ const pool = require('./pool');
 const initDB = async () => {
   const client = await pool.connect();
   try {
+    await client.query(`CREATE EXTENSION IF NOT EXISTS vector;`).catch(() => {
+      console.log('⚠️ pgvector not available, skipping');
+    });
+
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -47,7 +51,17 @@ const initDB = async () => {
         is_read BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT NOW()
       );
+
+      CREATE TABLE IF NOT EXISTS article_embeddings (
+        id SERIAL PRIMARY KEY,
+        title TEXT,
+        description TEXT,
+        url TEXT UNIQUE,
+        embedding TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
     `);
+
     console.log('✅ Database initialized successfully');
   } catch (err) {
     console.error('❌ Database init error:', err.message);
@@ -56,4 +70,4 @@ const initDB = async () => {
   }
 };
 
-module.exports = initDB;
+module.exports = initDB; 

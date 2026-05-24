@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
 const { register, login, getMe, updateTopics } = require('../controllers/authController');
-const { getNewsByTopic, searchNews, getPersonalizedFeed } = require('../controllers/newsController');
+const { getNewsByTopic, searchNews, getPersonalizedFeed, askAI } = require('../controllers/newsController');
 const { addBookmark, getBookmarks, removeBookmark } = require('../controllers/bookmarkController');
 const { toggleLike, getLikedArticles } = require('../controllers/likeController');
 const { getNotifications, markAllRead, getUnreadCount } = require('../controllers/notificationController');
@@ -17,6 +17,7 @@ router.put('/auth/topics', auth, updateTopics);
 router.get('/news', auth, getNewsByTopic);
 router.get('/news/search', auth, searchNews);
 router.get('/news/feed', auth, getPersonalizedFeed);
+router.post('/news/ask', auth, askAI);
 
 // Bookmarks
 router.post('/bookmarks', auth, addBookmark);

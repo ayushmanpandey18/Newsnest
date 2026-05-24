@@ -11,9 +11,12 @@ export default function Home() {
   const { user } = useAuth();
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTopic, setActiveTopic] = useState(user?.topics?.[0] || 'technology');
+  const [activeTopic, setActiveTopic] = useState(user?.topics?.[0] || 'world');
   const [likedUrls, setLikedUrls] = useState([]);
   const [bookmarkedUrls, setBookmarkedUrls] = useState([]);
+  const [question, setQuestion] = useState('');
+  const [aiAnswer, setAiAnswer] = useState(null);
+  const [aiLoading, setAiLoading] = useState(false);
 
   const fetchLikedAndBookmarked = async () => {
     try {
@@ -31,9 +34,8 @@ export default function Home() {
     try {
       const res = await api.get(`/news?topic=${topic}`);
       setArticles(res.data.articles || []);
-    } catch {
-      toast.error('Failed to load news');
-    } finally {
+    } catch {}
+    finally {
       setLoading(false);
     }
   }, []);
@@ -46,6 +48,21 @@ export default function Home() {
   const handleTopicChange = (topic) => {
     setActiveTopic(topic);
     fetchNews(topic);
+  };
+
+  const askAI = async () => {
+    if (!question.trim()) return;
+    setAiLoading(true);
+    setAiAnswer(null);
+    try {
+      const res = await api.post('/news/ask', { question });
+      setAiAnswer(res.data);
+    } catch (err) {
+      console.error('AI Error:', err.response?.data || err.message);
+      toast.error('AI failed, try again');
+    } finally {
+      setAiLoading(false);
+    }
   };
 
   const userTopics = user?.topics?.length > 0 ? user.topics : TOPICS;
@@ -70,6 +87,33 @@ export default function Home() {
               {t}
             </button>
           ))}
+        </div>
+
+        <div className="ai-box">
+          <div className="ai-input-row">
+            <input
+              type="text"
+              placeholder="Ask AI about today's news..."
+              value={question}
+              onChange={e => setQuestion(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && askAI()}
+            />
+            <button onClick={askAI} disabled={aiLoading}>
+              {aiLoading ? '...' : 'Ask AI'}
+            </button>
+          </div>
+          {aiAnswer && (
+            <div className="ai-answer">
+              <p>{aiAnswer.answer}</p>
+              <div className="ai-sources">
+                {aiAnswer.sources.map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer">
+                    📰 {s.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {loading ? (

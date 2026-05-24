@@ -78,3 +78,28 @@
   .news-grid, .loading-grid { grid-template-columns: 1fr; }
   .home-title { font-size: 1.5rem; }
 }
+
+
+.ai-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.ai-input-row { display: flex; gap: 8px; }
+.ai-input-row input {
+  flex: 1; padding: 10px 14px;
+  border-radius: 8px; border: 1px solid #444;
+  background: #111; color: white; font-size: 14px;
+}
+.ai-input-row button {
+  padding: 10px 18px; border-radius: 8px;
+  background: #6c63ff; color: white;
+  border: none; cursor: pointer; font-size: 14px;
+}
+.ai-input-row button:disabled { opacity: 0.6; cursor: not-allowed; }
+.ai-answer { margin-top: 12px; font-size: 14px; line-height: 1.6; color: #ddd; }
+.ai-sources { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+.ai-sources a { font-size: 12px; color: #888; text-decoration: none; }
+.ai-sources a:hover { color: #aaa; }
